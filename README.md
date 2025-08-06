@@ -1,2 +1,17 @@
-# el-oferton-realtime
-“Custom Action para actualizar en tiempo real desde Supabase”
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+Future<void> subscribeToOfertasRealtime() async {
+  final supabase = Supabase.instance.client;
+
+  supabase.channel('public:ofertas1')
+    .on(
+      RealtimeListenTypes.postgresChanges,
+      ChannelFilter(event: 'INSERT', schema: 'public', table: 'ofertas1'),
+      (payload, [ref]) {
+        final nuevaOferta = payload['new'];
+        print('🆕 Nueva oferta recibida: $nuevaOferta');
+
+        // Acá podés llamar una función para actualizar la UI
+      },
+    ).subscribe();
+}

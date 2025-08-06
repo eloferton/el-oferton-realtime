@@ -1,0 +1,9 @@
+name: el_oferton_realtime
+description: Flutter function para escuchar inserts desde Supabase
+version: 1.0.0
+
+environment:
+  sdk: ">=2.17.0 <3.0.0"
+
+dependencies:
+  supabase_flutter: ^1.7.0
